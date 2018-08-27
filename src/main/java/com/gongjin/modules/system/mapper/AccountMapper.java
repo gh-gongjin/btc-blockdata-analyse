@@ -12,5 +12,5 @@ import com.gongjin.modules.system.domain.Account;
  * @version 1.0
  */
 public interface AccountMapper extends JpaRepository<Account, Long>{
-
+	
 }

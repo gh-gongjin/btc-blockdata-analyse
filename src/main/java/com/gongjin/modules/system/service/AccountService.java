@@ -1,5 +1,7 @@
 package com.gongjin.modules.system.service;
 
+import java.util.List;
+
 import com.gongjin.modules.system.domain.Account;
 
 /**
@@ -18,4 +20,32 @@ public interface AccountService {
 	 * @return
 	 */
 	boolean save(Account account) throws Exception;
+
+	/**
+	 * 更新账户信息
+	 * @param account
+	 * @return
+	 */
+	boolean update(Account account) throws Exception;
+
+	/**
+	 * 查询账户信息
+	 * @param account
+	 * @return
+	 */
+	Account query(Account account) throws Exception;
+
+	/**
+	 * 分页查询账户信息
+	 * @param account
+	 * @return
+	 */
+	List<Account> queryPage(Account account) throws Exception;
+
+	/**
+	 * 验证账户信息
+	 * @param account
+	 * @return
+	 */
+	boolean validateAccount(Account account) throws Exception;
 }

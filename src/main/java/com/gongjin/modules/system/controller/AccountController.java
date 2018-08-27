@@ -2,6 +2,7 @@ package com.gongjin.modules.system.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,6 +52,32 @@ public class AccountController {
 			resp.setResult(Boolean.FALSE.toString());
 			resp.setResultDesc("保存账户异常,请稍后重试");
 			log.error("保存账户异常,请稍后重试");
+			log.error(e.getMessage(), e);
+		}
+
+		return resp;
+	}
+	
+	/**
+	 * 修改账户
+	 * 
+	 * @param account
+	 * @return
+	 */
+	@ApiOperation(value = "修改账户信息")
+	@PutMapping
+	public MessageResp<String> modifyAccount(@RequestBody Account account) {
+		MessageResp<String> resp = new MessageResp<String>();
+		try {
+			boolean isSuccess = accountService.update(account);
+			if (!isSuccess) {
+				resp.setResult(Boolean.FALSE.toString());
+				resp.setResultDesc("修改账户失败");
+			}
+		} catch (Exception e) {
+			resp.setResult(Boolean.FALSE.toString());
+			resp.setResultDesc("修改账户异常,请稍后重试");
+			log.error("修改账户异常,请稍后重试");
 			log.error(e.getMessage(), e);
 		}
 
