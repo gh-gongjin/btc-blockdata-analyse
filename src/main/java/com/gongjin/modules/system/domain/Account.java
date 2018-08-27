@@ -30,9 +30,9 @@ public class Account extends BaseDO {
 	 * 
 	 */
 	private static final long serialVersionUID = -4741785716837622598L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
 	@Column(name = "username")
