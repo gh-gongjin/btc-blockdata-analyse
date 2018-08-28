@@ -1,6 +1,11 @@
 package com.gongjin.modules.system.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -8,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gongjin.commom.MessageResp;
+import com.gongjin.commom.util.PageBeanUtil;
 import com.gongjin.modules.system.domain.Account;
 import com.gongjin.modules.system.service.AccountService;
 
@@ -57,7 +63,7 @@ public class AccountController {
 
 		return resp;
 	}
-	
+
 	/**
 	 * 修改账户
 	 * 
@@ -81,6 +87,29 @@ public class AccountController {
 			log.error(e.getMessage(), e);
 		}
 
+		return resp;
+	}
+
+	/**
+	 * 分页查询账户信息
+	 * 
+	 * @param account
+	 * @return
+	 */
+	@ApiOperation(value = "分页查询账户信息")
+	@GetMapping("/page")
+	public MessageResp<List<Account>> queryPage(@ModelAttribute Account account) {
+		MessageResp<List<Account>> resp = new MessageResp<List<Account>>();
+		try {
+			Page<Account> page = accountService.queryPage(account);
+			resp.setData(page.getContent());
+			resp.setPageBean(PageBeanUtil.createPageBean(page));
+		} catch (Exception e) {
+			resp.setResult(Boolean.FALSE.toString());
+			resp.setResultDesc("分页查询账户信息异常,请稍后重试");
+			log.error("分页查询账户信息异常,请稍后重试");
+			log.error(e.getMessage(), e);
+		}
 		return resp;
 	}
 }
