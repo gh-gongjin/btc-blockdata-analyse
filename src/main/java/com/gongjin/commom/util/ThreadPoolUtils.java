@@ -1,4 +1,6 @@
-package com.gongjin.commom.config;
+package com.gongjin.commom.util;
+
+import com.gongjin.commom.config.CustomThreadPool;
 
 /**
  * 线程池操作工具类
